@@ -1,14 +1,15 @@
 import React from "react";
-import { FaUser } from "react-icons/fa";
+import { FaTasks, FaUser } from "react-icons/fa";
 import { MdOutlinePayment } from "react-icons/md";
-import { RiMotorbikeFill } from "react-icons/ri";
+import { RiEBike2Fill, RiMotorbikeFill } from "react-icons/ri";
 import { TbTruckDelivery } from "react-icons/tb";
 import { Link, NavLink, Outlet } from "react-router";
 import useRole from "../hooks/useRole";
 
 const DashboardLayout = () => {
-
-  const {role} = useRole()
+  const { role } = useRole();
+  console.log("Dashbord role is",role);
+  
 
   return (
     <div className="drawer lg:drawer-open max-w-7xl mx-auto">
@@ -100,31 +101,72 @@ const DashboardLayout = () => {
                 <span className="is-drawer-close:hidden">Payment History</span>
               </NavLink>
             </li>
-{role === 'admin' && <>
-<li>
-              <NavLink
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="Approve Riders"
-                to={"/dashboard/approve-riders"}
-              >
-                <RiMotorbikeFill />
 
-                <span className="is-drawer-close:hidden">Approve Riders</span>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="Users Management"
-                to={"/dashboard/users-management"}
-              >
-                <FaUser />
+            {/* rider only can see this */}
+            {
+              role === 'rider' && (
+                <>
+                 <li>
+                  <NavLink
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Assign Deliveries"
+                    to={"/dashboard/assign-deliveries"}
+                  >
+                    <FaTasks />
 
-                <span className="is-drawer-close:hidden">Users Management</span>
-              </NavLink>
-            </li>
-</>}
-            
+                    <span className="is-drawer-close:hidden">
+                      Assign Deliveries
+                    </span>
+                  </NavLink>
+                </li>
+                </>
+              )
+            }
+
+            {/* only admin can see this */}
+            {role === "admin" && (
+              <>
+                <li>
+                  <NavLink
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Approve Riders"
+                    to={"/dashboard/approve-riders"}
+                  >
+                    <RiMotorbikeFill />
+
+                    <span className="is-drawer-close:hidden">
+                      Approve Riders
+                    </span>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Assign Riders"
+                    to={"/dashboard/assign-riders"}
+                  >
+                    <RiEBike2Fill />
+
+                    <span className="is-drawer-close:hidden">
+                      Assign Riders
+                    </span>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Users Management"
+                    to={"/dashboard/users-management"}
+                  >
+                    <FaUser />
+
+                    <span className="is-drawer-close:hidden">
+                      Users Management
+                    </span>
+                  </NavLink>
+                </li>
+              </>
+            )}
 
             {/* List item */}
             <li>

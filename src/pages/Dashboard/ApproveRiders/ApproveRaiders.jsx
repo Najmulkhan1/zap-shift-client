@@ -60,7 +60,8 @@ function ApproveRaiders() {
               <th>Name</th>
               <th>Email</th>
               <th>District</th>
-              <th>Status</th>
+              <th>Application Status</th>
+              <th>Work Status</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -86,6 +87,8 @@ function ApproveRaiders() {
                 >
                   {rider.status}
                 </td>
+
+                <td>{rider.workStatus}</td>
                 <td>
                   <button onClick={() => handleApproval(rider)} className="btn">
                     <FaUserCheck />

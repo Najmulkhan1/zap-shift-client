@@ -30,3 +30,7 @@ dist-ssr
 .venv/
 venv/
 config.bat
+
+# Environment variables & secrets (added by GitHub Guardian)
+.env
+.env.*
